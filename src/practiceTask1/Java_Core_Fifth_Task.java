@@ -1,5 +1,6 @@
 package practiceTask1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /*
@@ -31,5 +32,6 @@ public class Java_Core_Fifth_Task {
 
         // a)
         reverse(array, 5);
+        System.out.println(Arrays.toString(array));
     }
 }
