@@ -29,6 +29,7 @@ public class Java_Core_First_Task {
 
         int sumAllD = firstD + secondD + thirdD + fourthD;
         System.out.println("The sum of all digits is: " + sumAllD);
+        int i;
 
     }
 }
