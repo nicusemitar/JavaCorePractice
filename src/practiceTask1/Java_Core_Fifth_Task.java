@@ -1,6 +1,7 @@
 package practiceTask1;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Scanner;
 
 /*
@@ -66,13 +67,14 @@ public class Java_Core_Fifth_Task {
             array[i] = scn.nextInt();
 
         // a)
-        reverse(array, 5);
+        reverse(array, 3);
         for (int i = 0; i < n; i++)
             System.out.print(array[i] + " ");
         System.out.println();
 
-        // b)
+//        // b)
         array = sort(array);
+//         Arrays.sort(array);
         for (int i = 0; i < n; i++)
             System.out.print(array[i] + " ");
         System.out.println();

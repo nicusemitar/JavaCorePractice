@@ -59,109 +59,15 @@ class Emp implements Comparable<Emp> {
     }
 }
 
-// clasa Comparator pentru comparatie dupa alte criterrii: Comparator<T>
-// dupa salariu
-class EmpComparator1 implements Comparator<Emp> {
-    @Override
-    public int compare(Emp e1, Emp e2) {
-        return (e1.getSalary() - e2.getSalary());
-    }
-}
-
-// dupa id
-class EmpComparator2 implements Comparator<Emp> {
-    @Override
-    public int compare(Emp e1, Emp e2) {
-        return (e1.getId() - e2.getId());
-    }
-}
-
 public class FirstAndSecondTask {
     public static void main(String[] args) {
         //1
-        List<Integer> listMerge1 = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 10, 12));
-        List<Integer> listMerge2 = new ArrayList<>(Arrays.asList(1, 8, 5, 9, 14, 12));
-        Set<Integer> set = new TreeSet<>(listMerge1);
-        set.addAll(listMerge2);
-        List<Integer> combinedList = new ArrayList<>(set);
-        System.out.println(combinedList);
-
-        // As well a algorithm for First Task
-//        List<Integer> l1 = new ArrayList(Arrays.asList(2, 1, 4, 3, 7, 5));
-//        List<Integer> l2 = new ArrayList(Arrays.asList(10, 1, 11, 3, 13, 5));
-        // rezultatul asteptatat: 1 2 3 4 5 7 10 11 13
-        // le sortam
-//        Collections.sort(l1);
-//        Collections.sort(l2);
-        // merged list
-//        List<Integer> l3 = new ArrayList();
-//        // algoritmul de interclasare
-//        int i1 = 0, i2 = 0;
-//        int v1 = 0, v2 = 0;
-//        while (true) {
-//            v1 = l1.get(i1);
-//            v2 = l2.get(i2);
-//            while (v1 < v2) {
-//                l3.add(v1);
-//                i1++;
-//                if (i1 < l1.size())
-//                    v1 = l1.get(i1);
-//                else
-//                    break;
-//            }
-//            if (i1 == l1.size())
-//                break;
-//            if (v1 == v2) {
-//                l3.add(v1);
-//                i1++;
-//                i2++;
-//                if (i1 < l1.size())
-//                    v1 = l1.get(i1);
-//                else
-//                    break;
-//                if (i2 < l2.size())
-//                    v2 = l2.get(i2);
-//                else
-//                    break;
-//            }
-//            while (v2 < v1) {
-//                l3.add(v2);
-//                i2++;
-//                if (i2 < l2.size())
-//                    v2 = l2.get(i2);
-//                else
-//                    break;
-//            }
-//            if (i2 == l2.size())
-//                break;
-//            if (v1 == v2) {
-//                l3.add(v2);
-//                i1++;
-//                i2++;
-//                if (i1 < l1.size())
-//                    v1 = l1.get(i1);
-//                else
-//                    break;
-//                if (i2 < l2.size())
-//                    v2 = l2.get(i2);
-//                else
-//                    break;
-//            }
-//        }
-//        while (i1 < l1.size()) {
-//            v1 = l1.get(i1);
-//            l3.add(v1);
-//            i1++;
-//        }
-//        while (i2 < l2.size()) {
-//            v2 = l2.get(i2);
-//            l3.add(v2);
-//            i2++;
-//        }
-//        for (int ival : l3) {
-//            System.out.print(ival + " ");
-//        }
-//        System.out.println();
+//        List<Integer> listMerge1 = new ArrayList<>(Arrays.asList(1, 3, 5, 7, 10, 12));
+//        List<Integer> listMerge2 = new ArrayList<>(Arrays.asList(1, 8, 5, 9, 14, 12));
+//        Set<Integer> set = new TreeSet<>(listMerge1);
+//        set.addAll(listMerge2);
+//        List<Integer> combinedList = new ArrayList<>(set);
+//        System.out.println(combinedList);
 
         //2
         List<Emp> list1 = new ArrayList<Emp>();
@@ -170,34 +76,42 @@ public class FirstAndSecondTask {
         list1.add(new Emp(23456, "Vanea", "Alex", 1800));
         list1.add(new Emp(33456, "Gica", "Ioana", 1801));
 
-        Collections.sort(list1);
-        for (Emp eName : list1) {
-            System.out.printf(eName + "%n ");
-        }
-        System.out.println();
+        System.out.println("Please enter one of the criteria: " + "\n" +
+                "ID to sort by ID, \nNAME to sort by NAME, \nSALASC to sort by ascending salary," +
+                "\nSALDESC to sort by decreasing salary.");
+        Scanner scn = new Scanner(System.in);
+        String crit = scn.next();
+        boolean bsort = true;
 
-//        Collections.sort(list1, new EmpComparator1());
-        list1.sort(new EmpComparator1());
-        for (Emp eSalaryAsc : list1) {
-            System.out.printf(eSalaryAsc + "%n ");
-        }
-        System.out.println();
+        if (crit.equals("NAME")) {
+            Collections.sort(list1);
 
-        list1.sort(new Comparator<Emp>() {
-            @Override
-            public int compare(Emp o1, Emp o2) {
-                return -(o1.getSalary() - o2.getSalary());
+        } else if (crit.equals("SALASC")) {
+            list1.sort(new EmpComparator1());
+        }
+
+//         Clasa anonima
+        else if (crit.equals("SALDESC")) {
+            list1.sort(new Comparator<Emp>() {
+                @Override
+                public int compare(Emp o1, Emp o2) {
+                    return -(o1.getSalary() - o2.getSalary());
+                }
+            });
+        }
+
+//        Expresie Leambda
+        else if (crit.equals("ID")) {
+            list1.sort((e1, e2) -> (e1.getId() - e2.getId()));
+        } else {
+            bsort = false;
+        }
+        if (bsort) {
+            for (Emp e : list1) {
+                System.out.print(e + " " + "\n");
             }
-        });
-        for (Emp eSalaryDesc : list1) {
-            System.out.printf(eSalaryDesc + "%n ");
-        }
-        System.out.println();
-
-//        list1.sort(new EmpComparator2());
-        list1.sort((e1, e2) -> (e1.getId() - e2.getId()));
-        for (Emp eID : list1) {
-            System.out.printf(eID + "%n ");
-        }
+            System.out.println();
+        } else
+            System.out.println("Unknown criterion: " + crit + "\nTry: ID | NAME | SALASC | SALDESC");
     }
 }
