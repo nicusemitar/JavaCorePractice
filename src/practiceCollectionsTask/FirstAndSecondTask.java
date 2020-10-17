@@ -1,3 +1,4 @@
+
 package practiceCollectionsTask;
 
 import java.util.*;
@@ -170,34 +171,41 @@ public class FirstAndSecondTask {
         list1.add(new Emp(23456, "Vanea", "Alex", 1800));
         list1.add(new Emp(33456, "Gica", "Ioana", 1801));
 
-        Collections.sort(list1);
-        for (Emp eName : list1) {
-            System.out.printf(eName + "%n ");
-        }
-        System.out.println();
+        Scanner scn = new Scanner(System.in);
+        String crit = scn.next();
+        boolean bsort = true;
 
-//        Collections.sort(list1, new EmpComparator1());
-        list1.sort(new EmpComparator1());
-        for (Emp eSalaryAsc : list1) {
-            System.out.printf(eSalaryAsc + "%n ");
-        }
-        System.out.println();
+        if (crit.equals("NAME")) {
+            Collections.sort(list1);
 
-        list1.sort(new Comparator<Emp>() {
-            @Override
-            public int compare(Emp o1, Emp o2) {
-                return -(o1.getSalary() - o2.getSalary());
+        } else if (crit.equals("SALCRESC")) {
+//            Collections.sort(list1, new EmpComparator1());
+            list1.sort(new EmpComparator1());
+        }
+
+//         Clasa anonima
+        else if (crit.equals("SALDESC")) {
+            list1.sort(new Comparator<Emp>() {
+                @Override
+                public int compare(Emp o1, Emp o2) {
+                    return -(o1.getSalary() - o2.getSalary());
+                }
+            });
+        }
+
+//        Expresie Leambda
+        else if (crit.equals("ID")) {
+            list1.sort((e1, e2) -> (e1.getId() - e2.getId()));
+        } else {
+            bsort = false;
+        }
+        if (bsort) {
+            for (Emp e : list1) {
+                System.out.print(e + " " + "\n");
             }
-        });
-        for (Emp eSalaryDesc : list1) {
-            System.out.printf(eSalaryDesc + "%n ");
-        }
-        System.out.println();
-
-//        list1.sort(new EmpComparator2());
-        list1.sort((e1, e2) -> (e1.getId() - e2.getId()));
-        for (Emp eID : list1) {
-            System.out.printf(eID + "%n ");
-        }
+            System.out.println();
+        } else
+            System.out.println("Criteriu necunoscut " + crit);
     }
 }
+

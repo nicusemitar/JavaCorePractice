@@ -35,7 +35,7 @@ public class ExceptionsMechanism {
                             ArmyTattoosCriteria.tattoosCriteria(candidate5);
                         } catch (Exception e) {
                             System.out.println();
-                            System.out.printf("Exception occured: " + e);
+                            System.out.println("Exception occured: " + e);
                         }
                     }
                 }
